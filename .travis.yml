@@ -1,0 +1,21 @@
+---
+sudo: required
+
+services:
+  - docker
+
+install:
+  - docker build -t lgatica/gitlab-deploy-ssh:latest .
+
+script:
+  - ssh-keygen -t rsa -N "" -f my.key
+  - SSH_PRIVATE_KEY=$(cat my.key)
+  - SSH_HOST=travis-ci.org
+  - docker run --rm -e SSH_PRIVATE_KEY=$SSH_PRIVATE_KEY -e SSH_HOST=$SSH_HOST lgatica/gitlab-deploy-ssh:latest sh -c 'which ssh-add || exit 1'
+
+after_success:
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker push lgatica/gitlab-deploy-ssh:latest
+
+notifications:
+  email: false
