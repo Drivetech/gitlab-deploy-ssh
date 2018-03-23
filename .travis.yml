@@ -11,7 +11,7 @@ script:
   - ssh-keygen -t rsa -N "" -f my.key
   - SSH_PRIVATE_KEY=$(cat my.key)
   - SSH_HOST=travis-ci.org
-  - docker run --rm -e SSH_PRIVATE_KEY=$SSH_PRIVATE_KEY -e SSH_HOST=$SSH_HOST lgatica/gitlab-deploy-ssh:latest sh -c 'which ssh-add || exit 1'
+  - docker run --rm -e SSH_PRIVATE_KEY="$SSH_PRIVATE_KEY" -e SSH_HOST="$SSH_HOST" lgatica/gitlab-deploy-ssh:latest sh -c 'which ssh-add || exit 1'
 
 after_success:
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
