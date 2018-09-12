@@ -1,4 +1,4 @@
-FROM lgatica/openssh-client:latest@sha256:b8a5f0e1cd54302450bf3e4708095b0536f66450d2c1593d225267df30a9bb19
+FROM lgatica/openssh-client:latest@sha256:3498f8e36baec5dc620b43afcdc7069edbd90efd4b6aa42f045d107baf7b44ad
 
 LABEL maintainer "Leonardo Gatica <lgatica@protonmail.com>"
 
